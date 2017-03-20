@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+/* MAIN STYLES */
+body { background-color: #f2f2f2; }
+a, a:visited { color: #7a848e; }
+
+.tag-item a.multiple.ng-scope:hover { text-decoration: none; }
+.capitalize { text-transform: capitalize; }
+
+/* HEADER STYLES */
+#header-nav{ background-color: #505b66; }
+#header-nav a.navbar-brand{ font-family: 'Lobster', cursive; color: #ffffff; }
+#header-nav .nav>li>a.username { padding: 15px; color: #ffffff !important; cursor: pointer; }
+#header-nav .nav>li>a.username:hover,
+#header-nav .nav>li>a.username:focus,
+#header-nav .nav>li>a.username:active, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover { background-color: #8699ab !important; }
+
+/* PAGE STYLES */
+.page-header h1 { font-family: 'Lobster', cursive; color: #7a848e; }
+
+
+/*----------------------------------------------------------------------
+ LOGIN PAGE 
+ ---------------------------------------------------------------------*/
+
+/* MAIN STYLES */
+body#login-page { background-color: #f2f2f2; }
+
+body#login-page .main {
+	margin: 100px auto;
+	padding: 30px 40px;
+	width: 50%;
+	background-color: #ffffff;
+	border: 1px solid #f2f2f2;
+	border-radius: 5px;
+}
+
+body#login-page .form-header {
+	text-align: center;
+}
+
+body#login-page .main h1 { font-family: 'Lobster', cursive; font-size: 28px; color: #596672; }
+
+.copy-right { margin-top: 60px; color: #596672; text-align: center; }
+
+.panel-heading { padding: 10px; font-weight: bold; }
+
+.table-striped>tbody>tr:nth-of-type(odd) { background-color: #f2f2f2; }
+
+/* FORM STYLES */
+
+
+form#admin-login { margin: 40px auto 0 auto; max-width: 500px; }
+
+form#admin-login { color: #596672; }
+
+form#admin-login input[type="email"],
+form#admin-login input[type="password"] { height: 40px; }
+
+form#admin-login button.btn.btn-default { margin-top: 8px; width: 100%; height: 50px; font-size: 18px; color: #ffffff; font-weight: bold; background-color: #95abbe; border-color: #8699ab; }
+
+form#admin-login button.btn.btn-default:hover { background-color: #8699ab; }
+
+.btn-link { color: #7a848e; }
+.btn.btn-default { color: #7a848e; }
+.btn.btn-default:hover { color: #ffffff; background-color: #8699ab; }
+.btn.btn-primary { color: #ffffff; background-color: #95abbe; border-color: #8699ab; }
+.btn.btn-primary:hover { background-color: #8699ab; }
+.btn-danger { color: #fff; background-color: #d9534f; border-color: #d43f3a; }
+
+.hidden-email{display:none;}
+
+/* RESPONSIVE STYLES */
+@media screen and (max-width: 900px) {
+	
+	body#login-page .main { padding: 30px 40px; width: 75%; }
+
+}
+
+@media screen and (max-width: 767px) {
+	
+	body#login-page .main { padding: 20px 25px; width: 85%; }
+
+}
+
+/*  TAB STYLES  */
+.navbar-default .navbar-toggle { background: #ddd; }
+
+.nav-tabs {
+    margin-bottom: -1px;
+    border-bottom: 0;
+}
+.tab-content {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom:10px;
+}
+.tab-pane { 
+	 
+	border-radius: 0 4px 4px 4px; 
+} 
+
+.thirty-characters{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
+}
+
+.twenty-characters{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100px;
+}

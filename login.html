@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | Shoulder Saver</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    
+    <!-- STYLESHEETS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css"/>
+    
+    <!--STAMPLAY SDK -->
+    <script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.6/stamplay.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="node_modules/bootbox/bootbox.min.js"></script>
+</head>
+<body id="login-page">
+
+<div id="wrapper">
+	<div id="page-wrapper">	
+		<div class="main">
+			<div class="login-form">
+				<div class="form-header">
+					<img src="images/logo.jpeg" width="100" alt="Andrisani Sports" style="border-radius: 50px;" />
+					<h1>Shoulder Saver Admin Login</h1>
+                </div><!-- /.form-header -->
+	  		        
+				<form id="admin-login" onsubmit="return login()">
+				  <div class="form-group">
+				    <label for="email">Email address</label>
+				    <input type="email" class="form-control" id="email" placeholder="Email">
+				  </div>
+				  <div class="form-group">
+				    <label for="password">Password</label>
+				    <input type="password" class="form-control" id="password" placeholder="Password">
+				  </div>
+				  <button type="submit" class="btn btn-default">Login</button>
+				</form>
+
+			</div><!-- /.login-form -->
+			
+			<div class="copy-right">
+				<p>&copy;All Rights Reserved.</p>
+			</div><!-- /.copy-right -->
+			
+		</div><!-- /.main -->
+	</div><!-- /#page-wrapper -->		
+</div><!-- /#wrapper -->
+	
+<script type="application/x-javascript">
+    // STAMPLAY INIT
+    Stamplay.init('pitchingdata');
+
+    // SET UP LOGIN FUNCTION
+    function login(){
+        var username = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        Stamplay.User.login({
+            email : username,
+            password: password
+        }).then(function(res) {
+            // NOTE: the Stamplay SDK saves the jwt token to localStorage using the root url + '-jwt' as the key. EXAMPLE: "http://ngadmin-jwt": [token]
+            // save user values to localStorage
+            window.localStorage.setItem('user', JSON.stringify(res));
+            
+            // set response equal to user
+            var user = res;
+            console.log('Logged User:', user);
+            
+            window.localStorage.setItem('username', user.displayName);
+
+            // get current user's ID
+            var userId = user._id;
+            console.log('Logged Users ID:', userId);
+						
+						// get current user's role
+            var userRole = user.givenRole;
+            console.log('User Role??', userRole);
+           
+            // if user is ADMIN redirect to the home page of the admin app, otherwise stay on login page and alert
+
+            if (userRole == '58b882eab9776b3046a2f29f') {
+            	window.location.href = "./index.html";
+            } else {
+            	window.localStorage.removeItem('user');
+            	window.localStorage.removeItem('username');
+                var url = window.location.origin;
+                if(window.localStorage[url+"-jwt"]){
+                  window.localStorage.removeItem(url + "-jwt");
+                }
+            	// window.localStorage.removeItem('http://ngadmin-jwt');
+                window.localStorage.removeItem(url + "-jwt");
+            	bootbox.alert({
+            		title: "Andrisani Sports Admin",
+            		message: "You must be an Administrator to access this content."
+							});
+            }
+            
+        }, function(err) {
+            bootbox.alert({
+            	title: "Login Failed",
+            	message: "An error occurred while attempting to authenticate. Please be sure your email and password are valid."
+            });
+        })
+        return false;
+    }
+</script>
+</body>
+</html>

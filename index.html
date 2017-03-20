@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Admin | Shoulder Saver</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="node_modules/ng-admin/build/ng-admin.min.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css"/>
+    
+    <!-- JS DEPENDENCIES -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="node_modules/bootbox/bootbox.js"></script>
+</head>
+<body ng-app="myApp">
+    <div ui-view="ng-admin"></div>
+    <script src="https://use.fontawesome.com/9702cfc1b4.js"></script>
+    <script src="node_modules/ng-admin/build/ng-admin.min.js"></script>
+    <script type="text/javascript">
+      // SET TIMEOUT TO CLEAR LOCAL STORAGE AFTER 2 HOURS
+      var hours = 2; // Reset when storage is more than 2 hours
+      var now = new Date().getTime();
+      var setupTime = localStorage.getItem('setupTime');
+      if (setupTime == null) {
+          localStorage.setItem('setupTime', now)
+      } else {
+          if(now-setupTime > hours*60*60*1000) {
+              localStorage.clear()
+              localStorage.setItem('setupTime', now);
+          }
+      }
+      
+      
+      // CHECK FOR LOGGED USER
+      var currUrl = window.location.origin;
+      var token = window.localStorage.getItem(currUrl + '-jwt');
+      //var token = window.localStorage.getItem("http://ngadmin-jwt");
+      var user = window.localStorage.getItem('user');
+      
+      if (!user || !token) {
+          window.location.href = "./login.html";
+      }
+
+      function logout() {
+      	bootbox.confirm("You are about to logout. Are you sure?", function(result) {
+      	  if (result == true) {
+      	  	window.localStorage.removeItem('user');
+      	  	window.localStorage.removeItem('username');
+            var url = window.location.origin;
+            if(window.localStorage[url+"-jwt"]){
+              window.localStorage.removeItem(url + "-jwt");
+            }
+      	  	// window.localStorage.removeItem('http://ngadmin-jwt');
+            window.localStorage.removeItem(url + "-jwt");
+      	  	window.location.href = "./login.html";
+      	  }
+      	});    
+      }
+    </script>
+    <script type="text/javascript" src="build/bundle.js" charset="utf-8"></script>
+</body>
+</html>
