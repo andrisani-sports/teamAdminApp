@@ -1,4 +1,19 @@
 {
+  "name": "AndrisaniSportsTeamAdmin",
+  "version": "1",
+  "description": "Admin for teams; for pitcher diagnostic device",
+  "author": "Matt Eckman, Steve Roettger",
+  "scripts": {
+    "build": "webpack ./main.js ./build/bundle.js"
+  },
+  "main": "main.js",
+  "repository": {
+    "url": "https://github.com/andrisani-sports/andrisaniAdminApp.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": ""
+  },
   "dependencies": {
     "angular": "^1.6.3",
     "babel-preset-es2015": "^6.24.0",
