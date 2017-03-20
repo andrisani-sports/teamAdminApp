@@ -15,6 +15,9 @@ a, a:visited { color: #7a848e; }
 #header-nav .nav>li>a.username:focus,
 #header-nav .nav>li>a.username:active, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover { background-color: #8699ab !important; }
 
+/* MENU OVERWRITES */
+.nav>li>a.menu-heading { color: #ffffff; background: #7a848e; }
+
 /* PAGE STYLES */
 .page-header h1 { font-family: 'Lobster', cursive; color: #7a848e; }
 

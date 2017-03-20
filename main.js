@@ -32,8 +32,8 @@ require('./custom/errorHandlers/appLevel')(myApp);
 
 // User Name controller (used to pass user name to header)
 myApp.controller('username', ['$scope', '$window', function($scope, $window) { // used in header.html
-	
-	$scope.username =  $window.localStorage.getItem('username');
+    
+    $scope.username =  $window.localStorage.getItem('username');
     
 }])
 
@@ -139,6 +139,10 @@ myApp.config(['NgAdminConfigurationProvider','RestangularProvider',
     // pitcher workload
     var createPitcherWorkload = require('./models/pitcher_workload');
     var pitcher_workload = nga.entity('pitcher_workload');
+
+    // pitching data
+    var createPitchingData = require('./models/pitching_data');
+    var pitching_data = nga.entity('pitching_data');
     
     
 
@@ -149,6 +153,7 @@ myApp.config(['NgAdminConfigurationProvider','RestangularProvider',
     admin.addEntity(createTeamMembers(nga,team_members,teams,userEntity));
     admin.addEntity(createPitchers(nga,pitchers,teams,userEntity));
     admin.addEntity(createPitcherWorkload(nga,pitcher_workload,pitchers,userEntity));
+    admin.addEntity(createPitchingData(nga,pitching_data,pitchers,pitcher_workload,userEntity));
     
 /***************************************
  * CUSTOM MENU
@@ -157,14 +162,13 @@ myApp.config(['NgAdminConfigurationProvider','RestangularProvider',
     admin.menu(nga.menu()
         .addChild(nga.menu().title('Dashboard').icon('<span class="glyphicon glyphicon-calendar"></span>&nbsp;').link('/dashboard'))
         .addChild(nga.menu(nga.entity('users')).title('Users').icon('<span class="glyphicon glyphicon-user"></span>&nbsp;'))
-        .addChild(nga.menu().title('Team Info').icon('<span class="glyphicon glyphicon-folder-open"></span>&nbsp;')
+        .addChild(nga.menu().template(`<a class="menu-heading"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; Team Info</a>`))
             .addChild(nga.menu(nga.entity('teams')).title('Teams').icon('<span class="glyphicon glyphicon-user"></span>&nbsp;'))
             .addChild(nga.menu(nga.entity('team_members')).title('Team Members').icon('<span class="glyphicon glyphicon-user"></span>&nbsp;'))
-        )
-        .addChild(nga.menu().title('Pitcher Info').icon('<span class="glyphicon glyphicon-folder-open"></span>&nbsp;')
+        .addChild(nga.menu().template(`<a class="menu-heading"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; Pitcher Info</a>`))
             .addChild(nga.menu(nga.entity('pitchers')).title('Pitchers').icon('<span class="glyphicon glyphicon-user"></span>&nbsp;'))
             .addChild(nga.menu(nga.entity('pitcher_workload')).title('Pitcher Workload').icon('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;'))
-        )
+            .addChild(nga.menu(nga.entity('pitching_data')).title('Pitching Data').icon('<span class="glyphicon glyphicon-file"></span>&nbsp;'))
     );
 
 /***************************************
